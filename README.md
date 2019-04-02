@@ -1,0 +1,2 @@
+# GoogleCustomerRevenuePrediction
+Performed exploratory data analysis on the datasets and reduced the number of features by feature extraction and feature selection. Designed LightGBM, XGBoost, Catboost and ensemble models to predict the revenue that a customer will generate. Analyzed the prediction results by evaluating factors such as validation score, accuracy, mean absolute error, and RMSE. Altered the dataset and identified which features play significant roles in generating revenue.
