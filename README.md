@@ -40,12 +40,11 @@ This graph confirms the 80/20 rule which we mentioned as part of the introductio
 We observe that there are several constant and NaN columns which do not add any meaning to the analysis of the dataset. We are primarily removing them to save memory and time.
 
 After this we focus on keeping and understanding all the unique values present in the dataset. These have been summarized below:
-- Feature: transactionRevenue
-Number of instances in train set with non-zero revenue : 11515 and ratio is : 0.01274272314704 Number of unique customers with non-zero revenue : 9996 and the ratio is : 0.013996726255903731
+- Feature: transactionRevenue - Number of instances in train set with non-zero revenue : 11515 and ratio is : 0.01274272314704 Number of unique customers with non-zero revenue : 9996 and the ratio is : 0.013996726255903731
 - Feature: fullVisitorId
 - Feature: channelGrouping
-  Number of unique visitors in train set : 714167 out of rows : 903653 Number of unique visitors in test set : 617242 out of rows : 804684 Number of common visitors in train and test set : 7679
- Number of unique channelGroupings in train set : 8
+Number of unique visitors in train set : 714167 out of rows : 903653 Number of unique visitors in test set : 617242 out of rows : 804684 Number of common visitors in train and test set : 7679
+Number of unique channelGroupings in train set : 8
 Number of unique channelGroupings in test set : 8
 Number of common channelGroupings in train and test set : 8
 Similarly we have performed the analysis for several features which can be observed in the Python notebo ok.
@@ -74,37 +73,45 @@ From the above analysis in train set we can see that:
 • So, it might be a good idea to do time based validation for this dataset.
  
 ## Geographic Information Analysis:
-Continent
-Sub-continent
+### Continent
+### Sub-continent
 • In the sub-continent plot, we can see that America has both higher number of counts as well as highest number of counts where the revenue is non-zero
 • Though Asia and Europe has high number of counts, the number of non-zero revenue counts from these continents are comparatively low.
 • The mean revenue of eastern Asia is the highest even though the non-zero revenue count is very less.
-City
+### City
 • In the city plot, we can see that most entries are not available, which can cause infering incoreect information from the plot.
-Country
+### Country
 • In the country plot, we can see that United states has the most entries while the mean revenue of
 Japan is the highest. Network Domain
-Totals Analysis:
-PageViews
-Traffic Source Analysis:
-Source
-Medium
+### Totals Analysis:
+#### PageViews
+#### Traffic Source Analysis:
+#### Source
+#### Medium
 • "referral" has more number of non-zero revenue count compared to "organic" medium.
+
 • In the continent plot, we can see that America has both higher number of counts as well as highest number of counts where the revenue is non-zero
+
 • Though Asia and Europe has high number of counts, the number of non-zero revenue counts from these continents are comparatively low.
+
 • The mean revenue of Africa is the highest even though the count is very less.
- • The number of counts with non-zero revenue for "unknown.unknown" is lower than that for "(not set)".
-  • totalCount and Non variables look very predictive.
-• Count plot shows decreasing nature i.e. we have a very high total count for less number of hits
-and page views per visitor transaction and the overall count decreases when the number of hits
-per visitor transaction increases.
-• On the other hand, we can clearly see that when the number of hits / pageviews per visitor
-transaction increases, we see that there is a high number of non-zero revenue counts.
- • Though Youtube has high number of counts, the number of non-zero revenue counts are very less.
+
+• The number of counts with non-zero revenue for "unknown.unknown" is lower than that for "(not set)".
+
+• totalCount and Non variables look very predictive.
+
+• Count plot shows decreasing nature i.e. we have a very high total count for less number of hits and page views per visitor transaction and the overall count decreases when the number of hits per visitor transaction increases.
+
+• On the other hand, we can clearly see that when the number of hits / pageviews per visitor transaction increases, we see that there is a high number of non-zero revenue counts.
+
+• Though Youtube has high number of counts, the number of non-zero revenue counts are very less.
+
 • Google plex has a high ratio of non-zero revenue count to total count in the traffic source plot.
   
-#Modeling Dataset
-Before we start building models, we see if there are any features which are there in training dataset but not in test dataset. The feature "trafficSource.campaignCode" was not present in test dataset and hence we removed it from the dataset. Also we drop the constant variables which we got earlier. Also we drop the "sessionId" as it is a unique identifier of the visit. We impute 0 for missing target values as a part of preprocessing.
+# Modeling Dataset
+Before we start building models, we see if there are any features which are there in training dataset but not in test dataset. The feature "trafficSource.campaignCode" was not present in test dataset and hence we removed it from the dataset. 
+
+Also we drop the constant variables which we got earlier. Also we drop the "sessionId" as it is a unique identifier of the visit. We impute 0 for missing target values as a part of preprocessing.
 
 After performing some preprocessing on the dataset, we split it into development and validation sets based on the time. We have used the following three models for the modeling and prediction:
 
@@ -126,6 +133,6 @@ Here, we got a validation score of 1.70 using CatBoost.
 ## Ensemble Method
 The best ensemble is: ensemble1 with weights 0.7 for LightGBM, 0.3 for CatBoost and 0.0 for XGBoost
 
-#Summary
+# Summary
 The following results were obtained after the training and testing of the dataset using ensemble classifiers:
 The LightGBM model achieved the best results with regards to the training, validation. On the other hand we observed that, Catboost is sensitive to model overfitting and that is one of the reason why the model was shrinked to first 197 iterations. XGBoost did not perform much better on this dataset and took much more time as compared to others (from minutes to hours).
